@@ -1,0 +1,107 @@
+// ----------------------------------------------------------------------------
+// Settings
+// ----------------------------------------------------------------------------
+
+$scontecss-default: (
+  debug: false, // debug-mode → default: false
+  // naming: {
+  //   classic: {
+  //     prefix: "$",
+  //     separator: ".",
+  //   },
+  //   classic: {
+  //     prefix: "$",
+  //     separator: "→",
+  //   },
+  //   classic: {
+  //     prefix: "this",
+  //     separator: "→",
+  //   },
+  // }
+);
+
+$scontecss-settings: $scontecss-default;
+
+@if (variable-exists(scontecss)) {
+  $scontecss-settings: map-merge($scontecss-default, $scontecss-prefs);
+}
+
+// ----------------------------------------------------------------------------
+// Define scontecss
+// ----------------------------------------------------------------------------
+
+@mixin scontecss($var, $definition) {
+  @each $property, $value in $definition {
+    $endval: scontecss-value-replace($value, $var);
+    $endval: scontecss-value-replace($endval, $var, "this", ".");
+    $endval: scontecss-value-replace($endval, $var, "this", "→");
+    #{$property}: $endval;
+  }
+}
+
+// scontecss-list-replace(("a" "b"), "b", "c") → "a" "c"
+@function scontecss-list-replace($list, $search, $replace) {
+  $result: ();
+
+  @for $i from 1 through length($list) {
+    // if there is a string we need to manipulate
+    @if type-of(nth($list, $i)) == "string" {
+      // if the search matches whole string don't replace in string
+      @if nth($list, $i) == $search {
+        $result: append($result, $replace);
+      } @else {
+        $result: append(
+          $result,
+          scontecss-str-replace(nth($list, $i), $search, $replace)
+        );
+      }
+    } @else {
+      $result: append($result, nth($list, $i));
+    }
+  }
+
+  @return $result;
+}
+
+// scontecss-value-replace("$.left" 2px, (left: 2%)) → 2% 2px
+@function scontecss-value-replace($values, $variable, $prefix: "$", $separate: ".") {
+  $result: $values;
+
+  @if type-of($values) != "list" {
+    $result: scontecss-value-replace(($values null), $variable, $prefix);
+  } @else {
+    @if type-of($variable) != "map" {
+      $result: scontecss-list-replace($values, $prefix, $variable);
+    } @else {
+      @each $key, $value in $variable {
+        $result: scontecss-value-replace(
+          $result,
+          $value,
+          $prefix + $separate + $key
+        );
+      }
+    }
+  }
+  @return $result;
+}
+
+// ----------------------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------------------
+
+// https://stackoverflow.com/questions/12728634/string-replace-in-sass
+// Replacing string values in list
+/// Replace `$search` with `$replace` in `$string`
+/// @author Hugo Giraudel
+/// @param {String} $string - Initial string
+/// @param {String} $search - Substring to replace
+/// @param {String} $replace ('') - New value
+/// @return {String} - Updated string
+@function scontecss-str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + scontecss-str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}

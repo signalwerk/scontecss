@@ -1,0 +1,27 @@
+
+@mixin mediaquery-property($var, $definition, $defaultkey: 'default') {
+
+  // set value for other mediaqueries
+  @each $breakpoint, $value in $breakpoints {
+    @if($breakpoint == $defaultkey){
+      // set default value
+      @include mediaquery-property-at-breakpoint($var, $definition, default)
+    }
+    @else {
+      @media screen and (min-width: $value) {
+        @include mediaquery-property-at-breakpoint($var, $definition, $breakpoint)
+      }
+    }
+  }
+}
+
+
+// helper function for mediaquery-property()
+@mixin mediaquery-property-at-breakpoint($var, $definition, $breakpoint) {
+  // get definition at breakpoint
+  $currentDefinition: map-get($var, $breakpoint);
+
+  @if ($currentDefinition != null) {
+    @include scontecss($currentDefinition, $definition);
+  }
+}

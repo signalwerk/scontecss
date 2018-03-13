@@ -1,0 +1,108 @@
+@import "../scontecss";
+@import "./helpers";
+
+// definition of the breakpoints
+$breakpoints: (
+  default: 0,
+  tablet: 26rem,
+  desktop: 54rem,
+);
+
+
+// definition of colors
+$colors: (
+  default: gray,
+  tablet: green,
+  desktop: red,
+);
+
+// Use
+body {
+  @include mediaquery-property($colors, (
+    background-color: "$",
+  ));
+}
+
+// fontsize definition
+$fontsize: (
+  default: (
+    base: 16px,
+    h1: 1.3rem,
+    h2: 1.2rem,
+    h3: 1.1rem,
+  ),
+  tablet: (
+    base: 18px,
+    h1: 1.6rem,
+    h2: 1.4rem,
+    h3: 1.2rem,
+  ),
+  desktop: (
+    base: 20px,
+    h1: 2rem,
+    h2: 1.7rem,
+    h3: 1.4rem,
+  ),
+);
+
+// define typo
+html {
+  @include mediaquery-property($fontsize, (
+    font-size: "$.base"
+  ));
+}
+
+h3 {
+  @include mediaquery-property($fontsize, (
+    font-size: "$.h3"
+  ));
+}
+
+// caption
+$caption: (
+  default: (
+    dafault-display: block,
+    tablet-display: none,
+    desktop-display: none,
+  ),
+  tablet: (
+    dafault-display: none,
+    tablet-display: block,
+    desktop-display: none,
+  ),
+  desktop: (
+    dafault-display: none,
+    tablet-display: none,
+    desktop-display: block,
+  ),
+);
+
+.caption {
+  .default {
+    @include mediaquery-property($caption, (
+      display: "$.dafault-display"
+    ));
+  }
+  .tablet {
+    @include mediaquery-property($caption, (
+      display: "$.tablet-display"
+    ));
+  }
+  .desktop {
+    @include mediaquery-property($caption, (
+      display: "$.desktop-display"
+    ));
+  }
+}
+
+// reset
+html, body {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  font-weight: normal;
+}
