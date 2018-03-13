@@ -1,2 +1,4 @@
 /public
 /node_modules
+travis/.ssh/id_rsa
+travis/.ssh/id_rsa
