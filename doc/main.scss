@@ -1,5 +1,5 @@
 @import "../scontecss";
-@import "./helpers";
+@import "../scontecss-mediaquery";
 
 // definition of the breakpoints
 $breakpoints: (
@@ -7,7 +7,6 @@ $breakpoints: (
   tablet: 26rem,
   desktop: 54rem,
 );
-
 
 // definition of colors
 $colors: (
@@ -18,7 +17,7 @@ $colors: (
 
 // Use
 body {
-  @include mediaquery-scontecss($colors, (
+  @include scontecss-mediaquery($colors, (
     background-color: "$",
   ));
 }
@@ -47,13 +46,13 @@ $fontsize: (
 
 // define typo
 html {
-  @include mediaquery-scontecss($fontsize, (
+  @include scontecss-mediaquery($fontsize, (
     font-size: "$.base"
   ));
 }
 
 h3 {
-  @include mediaquery-scontecss($fontsize, (
+  @include scontecss-mediaquery($fontsize, (
     font-size: "$.h3"
   ));
 }
@@ -79,17 +78,17 @@ $caption: (
 
 .caption {
   .default {
-    @include mediaquery-scontecss($caption, (
+    @include scontecss-mediaquery($caption, (
       display: "$.dafault-display"
     ));
   }
   .tablet {
-    @include mediaquery-scontecss($caption, (
+    @include scontecss-mediaquery($caption, (
       display: "$.tablet-display"
     ));
   }
   .desktop {
-    @include mediaquery-scontecss($caption, (
+    @include scontecss-mediaquery($caption, (
       display: "$.desktop-display"
     ));
   }

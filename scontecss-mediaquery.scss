@@ -1,0 +1,35 @@
+@mixin scontecss-mediaquery($var, $definition, $defaultkey: 'default') {
+  // set value for mediaqueries
+  @each $breakpoint, $value in $breakpoints {
+    @if($breakpoint == $defaultkey){
+      // set default value
+      @include scontecss(map-get($var, $breakpoint), $definition);
+    }
+    @else {
+      @media screen and (min-width: $value) {
+        @include scontecss(map-get($var, $breakpoint), $definition);
+      }
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Define mediaquery(){}
+// ----------------------------------------------------------------------------
+
+@mixin to($viewportselector, $warn: true) {
+  @if $warn {
+    @warn "🙄 mobile first!";
+  }
+  $width: map-get($breakpoints, $viewportselector);
+  @media screen and (max-width: $width - ($width * 0 + 0.01) ) {
+    @content;
+  }
+}
+// shorthand
+@mixin from($viewportselector) {
+  $width: map-get($breakpoints, $viewportselector);
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}

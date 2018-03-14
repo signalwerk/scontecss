@@ -58,7 +58,7 @@ body {
 ```
 
 ## Breakpoint
-If you wanna have a flexible breakpoint handling. Check `./doc/_helpers.scss`.
+If you wanna have a flexible breakpoint handling. Check `./scontecss-mediaquery.scss`.
 
 ```SCSS
 // definition of the breakpoints
@@ -78,7 +78,7 @@ $colors: (
 
 // Use
 body {
-  @include mediaquery-property($colors, (
+  @include scontecss-mediaquery($colors, (
     background-color: "$",
   ));
 }
