@@ -1,7 +1,7 @@
 
 @mixin mediaquery-property($var, $definition, $defaultkey: 'default') {
 
-  // set value for other mediaqueries
+  // set value for mediaqueries
   @each $breakpoint, $value in $breakpoints {
     @if($breakpoint == $defaultkey){
       // set default value

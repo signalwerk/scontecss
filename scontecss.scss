@@ -4,25 +4,21 @@
 
 $scontecss-default: (
   debug: false, // debug-mode → default: false
-  // naming: {
-  //   classic: {
-  //     prefix: "$",
-  //     separator: ".",
-  //   },
-  //   classic: {
-  //     prefix: "$",
-  //     separator: "→",
-  //   },
-  //   classic: {
-  //     prefix: "this",
-  //     separator: "→",
-  //   },
-  // }
+  naming: (
+    classic: (
+      prefix: "$",
+      separator: ".",
+    ),
+    this: (
+      prefix: "this",
+      separator: "→",
+    ),
+  )
 );
 
 $scontecss-settings: $scontecss-default;
 
-@if (variable-exists(scontecss)) {
+@if (variable-exists(scontecss-prefs)) {
   $scontecss-settings: map-merge($scontecss-default, $scontecss-prefs);
 }
 
@@ -32,9 +28,10 @@ $scontecss-settings: $scontecss-default;
 
 @mixin scontecss($var, $definition) {
   @each $property, $value in $definition {
-    $endval: scontecss-value-replace($value, $var);
-    $endval: scontecss-value-replace($endval, $var, "this", ".");
-    $endval: scontecss-value-replace($endval, $var, "this", "→");
+    $endval: $value;
+    @each $style, $values in map-get($scontecss-settings, naming) {
+      $endval: scontecss-value-replace($endval, $var, map-get($values, prefix), map-get($values, separator));
+    }
     #{$property}: $endval;
   }
 }
