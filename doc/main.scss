@@ -18,7 +18,7 @@ $colors: (
 
 // Use
 body {
-  @include mediaquery-property($colors, (
+  @include mediaquery-scontecss($colors, (
     background-color: "$",
   ));
 }
@@ -47,13 +47,13 @@ $fontsize: (
 
 // define typo
 html {
-  @include mediaquery-property($fontsize, (
+  @include mediaquery-scontecss($fontsize, (
     font-size: "$.base"
   ));
 }
 
 h3 {
-  @include mediaquery-property($fontsize, (
+  @include mediaquery-scontecss($fontsize, (
     font-size: "$.h3"
   ));
 }
@@ -79,17 +79,17 @@ $caption: (
 
 .caption {
   .default {
-    @include mediaquery-property($caption, (
+    @include mediaquery-scontecss($caption, (
       display: "$.dafault-display"
     ));
   }
   .tablet {
-    @include mediaquery-property($caption, (
+    @include mediaquery-scontecss($caption, (
       display: "$.tablet-display"
     ));
   }
   .desktop {
-    @include mediaquery-property($caption, (
+    @include mediaquery-scontecss($caption, (
       display: "$.desktop-display"
     ));
   }
