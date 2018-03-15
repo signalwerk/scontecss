@@ -1,6 +1,6 @@
 {
   "name": "scontecss",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "scss-mixin to write @content with custom variables",
   "main": "scontecss.scss",
   "scripts": {
