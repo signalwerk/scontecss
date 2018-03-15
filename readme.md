@@ -107,3 +107,6 @@ body {
 
 ## Status
 [![Build Status](https://travis-ci.org/signalwerk/scontecss.svg?branch=master)](https://travis-ci.org/signalwerk/scontecss)
+
+## More
+* [SCSS – Passing arguments from a mixin to a content block #871](https://github.com/sass/sass/issues/871)
