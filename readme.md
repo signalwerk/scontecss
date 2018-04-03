@@ -12,6 +12,16 @@ npm install scontecss --save-dev
 @import "~/scontecss/scontecss";
 ```
 
+### post-css (BETA)
+```CSS
+@mixin scontecss {
+  font-size: $.fontSize.h1;
+  line-height: $.lineHeight.h1;
+  font-family: $.fontFamily.serif;
+  font-weight: $.fontWeight.sans.normal;
+}
+```
+
 ## Use (simple)
 
 ```SCSS
